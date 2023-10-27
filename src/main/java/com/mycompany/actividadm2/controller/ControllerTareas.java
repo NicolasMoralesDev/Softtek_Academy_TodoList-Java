@@ -14,9 +14,7 @@ import java.util.List;
  */
 public class ControllerTareas {
     
-    List <Tarea> lista = new ArrayList<>();
-
-  
+    private List <Tarea> lista = new ArrayList<>();
     
     public List<Tarea> traerTareas(){
         return lista;
@@ -32,9 +30,9 @@ public class ControllerTareas {
         
     }
 
-    public void borrarAuto(int par1) {
+    public void borrarAuto(int index) {
         
-        lista.remove(par1);
+        lista.remove(index);
     }
     
 }
