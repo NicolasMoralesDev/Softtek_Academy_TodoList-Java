@@ -17,5 +17,6 @@ public class ActividadM2 {
         VentanaPrincipal ventana = new VentanaPrincipal();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
+
     }
 }

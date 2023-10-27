@@ -4,17 +4,24 @@
  */
 package com.mycompany.actividadm2.vista;
 
+import com.mycompany.actividadm2.controller.ControllerTareas;
+import com.mycompany.actividadm2.model.Tarea;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Nico Morales
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+  ControllerTareas control = new ControllerTareas();
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
-        initComponents();
+        initComponents();    
     }
 
     /**
@@ -31,7 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        btnRefrescar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -43,6 +50,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         inputTitle = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("TODOLIST");
@@ -60,7 +72,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table);
 
-        btnRefrescar.setText("Refrescar");
+        btnEliminar.setText("Borrar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -68,15 +85,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -165,10 +181,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(76, Short.MAX_VALUE)
+                                .addGap(76, 76, 76)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                                 .addGap(19, 19, 19)))
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -196,18 +212,122 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
+           
+        String titulo = inputTitle.getText().toLowerCase();
+        String descripcion = inputDescription.getText().toLowerCase();
         
-        String titulo = inputTitle.getText();
-        String descripcion = inputDescription.getText();
+        if (titulo.isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "Ingrese un Titulo!");
+
+        } else if(descripcion.isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "Ingrese una Descripcion!");
+            
+        } else if (boxRepeat.isSelected() == true) {
+            
+                control.crearTareas(titulo, descripcion); 
+                llenarTabla();
+
+        } else {
+            
+          List <Tarea> lista = control.traerTareas();
+
+            if (lista.isEmpty()) {
+                
+                control.crearTareas(titulo, descripcion); 
+                llenarTabla();
+                
+            }else{
+                
+                 for (Tarea tarea : lista){
+                     
+               if (tarea.getTitulo().equals(titulo) ) {
+                   
+                 JOptionPane.showMessageDialog(null, "Esta Tarea ya existe!");
+                 break;
+               } else {
+
+                 control.crearTareas(titulo, descripcion);
+                 llenarTabla();
+                 break;
+               }
+            }
+                 
+            }
+          
+        }
         
-        
-        inputDescription.setText("");
         inputTitle.setText("");
+        inputDescription.setText("");
     }//GEN-LAST:event_btnSaveActionPerformed
 
+   
+    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+  
+        llenarTabla();
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+      
+        if (table.getRowCount() > 0) {
+            
+            if (table.getSelectedRow() != 1) {
+                
+                  int index = table.getSelectedRow();
+                control.borrarAuto(index);
+                llenarTabla();
+                JOptionPane.showMessageDialog(null,"Tarea borrada correctamente!!");
+                
+            } else {
+                
+                 JOptionPane.showMessageDialog(null, "No selecciono un registro para eliminar  eliminar!");
+
+            }
+            
+        } else {
+                JOptionPane.showMessageDialog(null,"La tabla esta vacia, no se puede eliminar!");
+
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+     private void llenarTabla(){
+         
+         
+        
+         DefaultTableModel modeloTable = new DefaultTableModel () {
+            
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        String titulos[]={
+            "Titulo",
+            "Descripcion"
+        };
+        
+        modeloTable.setColumnIdentifiers(titulos);
+        
+        List <Tarea> lista =  control.traerTareas();
+        if (lista != null) {
+            
+            for (Tarea tarea : lista){
+                Object[] object = {tarea.getTitulo(), tarea.getDescripcion()};
+                modeloTable.addRow(object);
+            }
+        }
+       
+        table.setModel(modeloTable);
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton boxRepeat;
-    private javax.swing.JButton btnRefrescar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnSave;
     private javax.swing.JTextArea inputDescription;
     private javax.swing.JTextPane inputTitle;
