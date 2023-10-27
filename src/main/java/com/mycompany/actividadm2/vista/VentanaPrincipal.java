@@ -275,7 +275,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
       
         if (table.getRowCount() > 0) {
             
-            if (table.getSelectedRow() != 1) {
+            if (table.getSelectedRow() != -1) {
                 
                   int index = table.getSelectedRow();
                 control.borrarAuto(index);
