@@ -7,6 +7,7 @@ package com.mycompany.actividadm2.controller;
 import com.mycompany.actividadm2.model.Tarea;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,16 +15,16 @@ import java.util.List;
  */
 public class ControllerTareas {
     
-//    atributo de la clase que servira de persistencia de datos
+//    Atributo de la clase que servira de persistencia de datos
     
     private List <Tarea> lista = new ArrayList<>();
     
-//    metodo para traer tareas
+//    Metodo para traer tareas
     public List<Tarea> traerTareas(){
         return lista;
     }
     
-//    metodo para crear tareas
+//    Metodo para crear tareas
     public void crearTareas(String titulo, String descripcion){
         
         Tarea nuevas = new Tarea();
@@ -34,10 +35,19 @@ public class ControllerTareas {
         
     }
 
-//    metodo para borrar tareas
+//    Metodo para borrar tareas
+    
     public void borrarAuto(int index) {
         
-        lista.remove(index);
+        try {
+            
+             lista.remove(index);
+             
+        } catch (IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null,e);
+
+        }
+       
     }
     
 }
