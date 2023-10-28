@@ -14,12 +14,16 @@ import java.util.List;
  */
 public class ControllerTareas {
     
+//    atributo de la clase que servira de persistencia de datos
+    
     private List <Tarea> lista = new ArrayList<>();
     
+//    metodo para traer tareas
     public List<Tarea> traerTareas(){
         return lista;
     }
     
+//    metodo para crear tareas
     public void crearTareas(String titulo, String descripcion){
         
         Tarea nuevas = new Tarea();
@@ -30,6 +34,7 @@ public class ControllerTareas {
         
     }
 
+//    metodo para borrar tareas
     public void borrarAuto(int index) {
         
         lista.remove(index);

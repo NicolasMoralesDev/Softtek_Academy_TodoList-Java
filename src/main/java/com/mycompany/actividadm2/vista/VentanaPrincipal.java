@@ -16,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+//    instanciamos de forma global tareascontroller
+    
   ControllerTareas control = new ControllerTareas();
     /**
      * Creates new form VentanaPrincipal
@@ -213,24 +215,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-           
+//         Traemos los datos desde la igu 
+                 
         String titulo = inputTitle.getText().toLowerCase();
         String descripcion = inputDescription.getText().toLowerCase();
         
+        
+          //        comprobamos si el titulo esta vacio
         if (titulo.isEmpty()){
             
             JOptionPane.showMessageDialog(null, "Ingrese un Titulo!");
+
+            //        comprobamos si la descripcion esta vacio
 
         } else if(descripcion.isEmpty()){
             
             JOptionPane.showMessageDialog(null, "Ingrese una Descripcion!");
             
+         //        comprobamos si el box esta de repetir tareas esta o no seleccionado
+            
         } else if (boxRepeat.isSelected() == true) {
             
+            //       creamos la tarea
+
                 control.crearTareas(titulo, descripcion); 
+                
+           //   refrescamos el listado de la tabla
+                        
                 llenarTabla();
 
         } else {
+            
+            //   verificamos si la tarea creada existe o no
             
           List <Tarea> lista = control.traerTareas();
 
@@ -264,6 +280,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
    
+//    Metodo se ejecuta cuando se pruduce la carga de la ventana, 
+//            llena la tabla cada vez que se ejecuta
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
   
@@ -271,12 +289,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowOpened
 
+    
+//    metodo de eliminacion de tareas
+            
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
       
+//        verificamos si se selecciono una fila
+
         if (table.getRowCount() > 0) {
             
             if (table.getSelectedRow() != -1) {
                 
+//                traemos el indice de la fila seleccionada y eliminamos
+
                   int index = table.getSelectedRow();
                 control.borrarAuto(index);
                 llenarTabla();
@@ -294,9 +319,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+//    metodo que llena la tabla con todas las tareas
+            
      private void llenarTabla(){
          
-         
+//         instanciamos un modelo de tabla
         
          DefaultTableModel modeloTable = new DefaultTableModel () {
             
@@ -305,6 +332,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return false;
             }
         };
+         
+//         seteamos los titulos de las columnas de las tablas
         
         String titulos[]={
             "Titulo",
@@ -313,6 +342,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         modeloTable.setColumnIdentifiers(titulos);
         
+//       traemos todas las tareas
+
         List <Tarea> lista =  control.traerTareas();
         if (lista != null) {
             
@@ -322,6 +353,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
        
+//        seteamos las tareas al modelo de la tabla
+
         table.setModel(modeloTable);
         
     }

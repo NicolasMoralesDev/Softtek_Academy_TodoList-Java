@@ -5,6 +5,8 @@ package com.mycompany.actividadm2.model;
  *
  * @author Nico Morales
  */
+
+//modelado de la entidad tareas
 public class Tarea {
     
     private String titulo;
