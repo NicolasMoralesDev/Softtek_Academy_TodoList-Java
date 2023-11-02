@@ -1,4 +1,3 @@
-
 package com.mycompany.actividadm3.controlador;
 
 import com.mycompany.actividadm3.database.Conexion;
@@ -10,29 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Nico Morales
  */
 public class ControllerTareas {
-    
-    
-   private Conexion conex = new Conexion();
-                 
-    public List<Tareas> traerTareas(){
-    List <Tareas> tareas = new ArrayList<>();
-       
-        
-        
-         try {
+
+    private Conexion conex = new Conexion();
+
+    public List<Tareas> traerTareas() {
+        List<Tareas> tareas = new ArrayList<>();
+
+        try {
 
             Connection conectar = conex.establecerConeccion();
             PreparedStatement buscar = conectar.prepareStatement("select * from tareas");
             ResultSet consulta = buscar.executeQuery();
 
             while (consulta.next()) {
-                
+
                 Tareas tarea = new Tareas();
                 tarea.setId(Long.parseLong(consulta.getString("id")));
                 tarea.setTitulo(consulta.getString("titulo"));
@@ -43,12 +38,11 @@ public class ControllerTareas {
             System.out.println(e);
         }
 
-      return  tareas;
-  }
-  
+        return tareas;
+    }
 
-    public void crearTarea(Tareas tarea){
-   
+    public void crearTarea(Tareas tarea) {
+
         try {
 
             Connection conectar = conex.establecerConeccion();
@@ -56,13 +50,45 @@ public class ControllerTareas {
             insert.setString(1, tarea.getTitulo());
             insert.setString(2, tarea.getDescripcion());
             insert.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Tarea creada con Exito!!!","Tarea", 3);
+
+            JOptionPane.showMessageDialog(null, "Tarea creada con Exito!!!", "Tarea", 3);
 
         } catch (Exception e) {
             System.out.println(e);
         }
 
-    
     }
+
+    public void eliminarTarea(int id) {
+
+        try {
+
+            Connection conectar = conex.establecerConeccion();
+            PreparedStatement eliminar = conectar.prepareStatement("delete from tareas where id = ?");
+            eliminar.setInt(1, id);
+            eliminar.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+    
+//       public void modificarTarea(Tareas tarea) {
+//
+//        try {
+//
+//            Connection conectar = conex.establecerConeccion();
+//            PreparedStatement eliminar = conectar.prepareStatement("delete from empleados where id = ?");
+//            eliminar.setInt(1, tarea.getId().intValue());
+//            eliminar.setString(1, tarea.getTitulo());
+//            eliminar.setString(1,  tarea.getDescripcion());
+//
+//            eliminar.executeUpdate();
+//
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//
+//    }
 }
