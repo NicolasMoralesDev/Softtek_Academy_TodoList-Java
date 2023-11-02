@@ -8,18 +8,28 @@ package com.mycompany.actividadm3.model;
  */
 public class Tareas {
     
+    private Long id;
     private String titulo;
     private String descripcion;
 
-    public Tareas() {
-    }
-
-    public Tareas(String titulo, String descripcion) {
+    public Tareas(Long id, String titulo, String descripcion) {
+        this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
 
+    public Tareas() {
+    }
+
     
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -35,7 +45,6 @@ public class Tareas {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
+
     
 }

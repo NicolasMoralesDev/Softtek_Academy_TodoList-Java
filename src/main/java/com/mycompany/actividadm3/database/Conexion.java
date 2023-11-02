@@ -33,7 +33,7 @@ public class Conexion {
             
             
         } catch (Exception e) {
-           // JOptionPane.showMessageDialog(null, "No se pudo conectar" + e.toString());
+            JOptionPane.showMessageDialog(null, "No se pudo conectar" + e.toString());
         }
         return conectar;
     }

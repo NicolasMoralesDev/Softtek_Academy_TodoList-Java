@@ -4,14 +4,14 @@
 
 package com.mycompany.actividadm3;
 
-import com.mycompany.actividadm3.database.Conexion;
+
 import com.mycompany.actividadm3.vista.VentanaPrincipal;
 
 /**
  *
  * @author Nico Morales
  */
-public class ActividadM2 {
+public class ActividadM3 {
 
     public static void main(String[] args) {
         

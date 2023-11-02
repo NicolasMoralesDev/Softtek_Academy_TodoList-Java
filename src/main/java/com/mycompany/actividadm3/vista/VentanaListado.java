@@ -5,11 +5,11 @@
 package com.mycompany.actividadm3.vista;
 
 import com.mycompany.actividadm3.controlador.ControllerTareas;
-import com.mycompany.actividadm3.controladorPersistencia.ControllerPersis;
 import com.mycompany.actividadm3.model.Tareas;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -86,37 +86,26 @@ public class VentanaListado extends javax.swing.JPanel {
         };
         
         String titulos[]={
+            "Id",
             "Titulo",
             "Descripcion"
         };
         
-                    
+        modeloTable.setColumnIdentifiers(titulos);
+              
   
-       
-       try {
-           
-                ControllerPersis rs = new ControllerPersis();
-            ResultSetMetaData metaData = rs.traerTareas().getMetaData();
-
-            int numColumnas = metaData.getColumnCount();
-
-            //Agregamos las filas al modelo de la tabla
-            while (rs.traerTareas().next()) {
-                Object[] rowData = new Object[numColumnas];
-                for (int i = 0; i < numColumnas; i++) {
-                    //Obtenemos los datos de cada columna por indice (comience en 1)
-                    rowData[i] = rs.traerTareas().getObject(i + 1);
-                }
-                modeloTable.addRow(rowData);
-            }
-
-            //Asignamos el modelo de tabla al componente TablaDatos
-            tabla.setModel(modeloTable);
+                   
+        List <Tareas> lista =   control.traerTareas();
+        if (lista != null) {
             
-       }catch (SQLException e) {
-           
-           System.out.println("error");
+            for (Tareas tarea : lista){
+                Object[] object = {tarea.getId(),tarea.getTitulo(), tarea.getDescripcion()};
+                modeloTable.addRow(object);
+            }
         }
+        
+        //Asignamos el modelo de tabla al componente TablaDatos
+        tabla.setModel(modeloTable);
       
            
     }

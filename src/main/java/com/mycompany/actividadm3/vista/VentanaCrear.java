@@ -5,6 +5,7 @@
 package com.mycompany.actividadm3.vista;
 
 import com.mycompany.actividadm3.controlador.ControllerTareas;
+import com.mycompany.actividadm3.model.Tareas;
 
 /**
  *
@@ -107,13 +108,16 @@ public class VentanaCrear extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
+        
+        Tareas tarea = new Tareas();
+        
         String titulo = inputTitle.getText();
         String descripcion = inputDescripcion.getText();
         
-        control.crearTarea(titulo, descripcion);       
-        
-        
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
+        control.crearTarea(tarea);       
+
         inputTitle.setText("");
         inputDescripcion.setText("");
     }//GEN-LAST:event_btnGuardarActionPerformed
