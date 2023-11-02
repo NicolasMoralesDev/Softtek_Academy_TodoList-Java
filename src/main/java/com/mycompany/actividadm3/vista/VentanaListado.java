@@ -39,6 +39,7 @@ public class VentanaListado extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,24 +61,35 @@ public class VentanaListado extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Editar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 135, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnEliminar)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(btnEliminar)
-                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminar)
+                    .addComponent(jButton1))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -105,15 +117,14 @@ public class VentanaListado extends javax.swing.JPanel {
 
                 int index = tabla.getSelectedRow();
                 Object id = tabla.getValueAt(index, 0);
-               int indetificador = Integer.parseInt(id.toString()) ;
-                System.out.println(indetificador);
+                Long indetificador = Long.parseLong(id.toString()) ;
                 control.eliminarTarea(indetificador);
                 llenarTabla();
                 JOptionPane.showMessageDialog(null,"Tarea borrada correctamente!!");
                 
             } else {
                 
-                 JOptionPane.showMessageDialog(null, "No selecciono un registro para eliminar  eliminar!");
+                 JOptionPane.showMessageDialog(null, "No selecciono un registro para eliminar!");
 
             }
             
@@ -122,6 +133,39 @@ public class VentanaListado extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        Tareas tarea = new Tareas();
+        
+        if (tabla.getRowCount() > 0) {
+            
+            if (tabla.getSelectedRow() != 1) {
+                
+                Long id = Long.parseLong( tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+                String titulo = String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1));
+                String descripcion = String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 2));
+
+                tarea.setId(id);
+                tarea.setTitulo(titulo);
+                tarea.setDescripcion(descripcion);
+                
+                VentanaEditar modif = new VentanaEditar(tarea);
+                modif.setVisible(true);
+                modif.setLocationRelativeTo(null);
+                
+                llenarTabla();
+            } else {
+                
+                 JOptionPane.showInternalMessageDialog(null, "No selecciono un registro para  modificar!");
+
+            }
+            
+        } else {
+                JOptionPane.showInternalMessageDialog(null, "La tabla esta vacia, no se puede modificar!");
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     public void llenarTabla (){
@@ -161,6 +205,7 @@ public class VentanaListado extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;

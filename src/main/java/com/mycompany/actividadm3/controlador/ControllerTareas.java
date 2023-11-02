@@ -59,13 +59,13 @@ public class ControllerTareas {
 
     }
 
-    public void eliminarTarea(int id) {
+    public void eliminarTarea(Long id) {
 
         try {
 
             Connection conectar = conex.establecerConeccion();
             PreparedStatement eliminar = conectar.prepareStatement("delete from tareas where id = ?");
-            eliminar.setInt(1, id);
+            eliminar.setLong(1, id);
             eliminar.executeUpdate();
 
         } catch (Exception e) {
@@ -74,21 +74,33 @@ public class ControllerTareas {
 
     }
     
-//       public void modificarTarea(Tareas tarea) {
-//
-//        try {
-//
-//            Connection conectar = conex.establecerConeccion();
-//            PreparedStatement eliminar = conectar.prepareStatement("delete from empleados where id = ?");
-//            eliminar.setInt(1, tarea.getId().intValue());
-//            eliminar.setString(1, tarea.getTitulo());
-//            eliminar.setString(1,  tarea.getDescripcion());
-//
-//            eliminar.executeUpdate();
-//
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//
-//    }
+      public void modificarTarea(Long id , String titulo, String descripcion) {
+          
+         
+
+      try {
+          
+          Tareas tarea = new Tareas();
+          
+          tarea.setId(id);
+          tarea.setTitulo(titulo);
+          tarea.setDescripcion(descripcion);
+          
+            Connection conectar = conex.establecerConeccion();
+
+            PreparedStatement modificar = conectar.prepareStatement("update tareas set titulo =  ? , descripcion = ? where id = ?");
+
+            modificar.setString(1, tarea.getTitulo());
+            modificar.setString(2, tarea.getDescripcion());
+            modificar.setLong(3, tarea.getId());
+            modificar.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null,"Tarea, Modificada con Exito!!!");
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 }
