@@ -17,4 +17,4 @@
 
 ### Put:
 
-![put]()
+![put](https://firebasestorage.googleapis.com/v0/b/fotos-cde1e.appspot.com/o/CapturaPUT.PNG?alt=media&token=14818ec0-f391-4a0d-a528-5d777b0ff02b&_gl=1*13174e1*_ga*NzE5NTI5MjkxLjE2OTg0Mzg2Mjc.*_ga_CW55HF8NVT*MTY5ODk3MTg5Ny4yLjEuMTY5ODk3MzYzMS41NC4wLjA.)
