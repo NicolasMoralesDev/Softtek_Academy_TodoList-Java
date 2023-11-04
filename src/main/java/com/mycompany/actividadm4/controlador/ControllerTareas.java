@@ -1,12 +1,7 @@
 package com.mycompany.actividadm4.controlador;
 
-import com.mycompany.actividadm4.database.Conexion;
 import com.mycompany.actividadm4.model.Tareas;
 import com.mycompany.actividadm4.persistence.PersistenceControlador;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -16,7 +11,7 @@ import javax.swing.JOptionPane;
  */
 public class ControllerTareas {
 
-    private Conexion conex = new Conexion();
+   
     private PersistenceControlador persisControl = new PersistenceControlador();
 
     public List<Tareas> traerTareas() {
@@ -41,13 +36,12 @@ public class ControllerTareas {
 
         try {
 
-            Connection conectar = conex.establecerConeccion();
-            PreparedStatement eliminar = conectar.prepareStatement("delete from tareas where id = ?");
-            eliminar.setLong(1, id);
-            eliminar.executeUpdate();
+            persisControl.eliminarTareas(id);
 
         } catch (Exception e) {
-            System.out.println(e);
+              
+              JOptionPane.showMessageDialog(null, e, "Error", 3);
+
         }
 
     }
@@ -64,20 +58,14 @@ public class ControllerTareas {
           tarea.setTitulo(titulo);
           tarea.setDescripcion(descripcion);
           
-            Connection conectar = conex.establecerConeccion();
-
-            PreparedStatement modificar = conectar.prepareStatement("update tareas set titulo =  ? , descripcion = ? where id = ?");
-
-            modificar.setString(1, tarea.getTitulo());
-            modificar.setString(2, tarea.getDescripcion());
-            modificar.setLong(3, tarea.getId());
-            modificar.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null,"Tarea, Modificada con Exito!!!");
+          persisControl.editarTarea(tarea);
+          JOptionPane.showMessageDialog(null,"Tarea, Modificada con Exito!!!");
 
 
         } catch (Exception e) {
-            System.out.println(e);
+
+            JOptionPane.showMessageDialog(null, e, "Error", 3);
+
         }
 
     }
