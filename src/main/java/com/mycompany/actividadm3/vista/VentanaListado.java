@@ -6,8 +6,6 @@ package com.mycompany.actividadm3.vista;
 
 import com.mycompany.actividadm3.controlador.ControllerTareas;
 import com.mycompany.actividadm3.model.Tareas;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -140,7 +138,7 @@ public class VentanaListado extends javax.swing.JPanel {
         
         if (tabla.getRowCount() > 0) {
             
-            if (tabla.getSelectedRow() != 1) {
+            if (tabla.getSelectedRow() != -1) {
                 
                 Long id = Long.parseLong( tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
                 String titulo = String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1));

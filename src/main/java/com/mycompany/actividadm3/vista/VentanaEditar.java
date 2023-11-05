@@ -41,8 +41,9 @@ public class VentanaEditar extends javax.swing.JFrame {
         inputTitle = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         inputId = new javax.swing.JTextField();
+        btnCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +69,13 @@ public class VentanaEditar extends javax.swing.JFrame {
             }
         });
 
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,7 +95,11 @@ public class VentanaEditar extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
-                            .addComponent(jButton1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancel)
+                                .addGap(23, 23, 23))
                             .addComponent(inputTitle))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -107,7 +119,9 @@ public class VentanaEditar extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(btnCancel))
                 .addGap(40, 40, 40))
         );
 
@@ -142,6 +156,10 @@ public class VentanaEditar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputIdActionPerformed
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
     private void cargarDatosTarea(Tareas tarea){
         
         inputId.setText(tarea.getId().toString());
@@ -150,6 +168,7 @@ public class VentanaEditar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JTextArea inputDescription;
     private javax.swing.JTextField inputId;
     private javax.swing.JTextField inputTitle;
