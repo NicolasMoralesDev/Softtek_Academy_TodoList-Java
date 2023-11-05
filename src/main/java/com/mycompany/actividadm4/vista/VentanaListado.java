@@ -138,7 +138,7 @@ public class VentanaListado extends javax.swing.JPanel {
         
         if (tabla.getRowCount() > 0) {
             
-            if (tabla.getSelectedRow() != 1) {
+            if (tabla.getSelectedRow() != -1) {
                 
                 Long id = Long.parseLong( tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
                 String titulo = String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1));
