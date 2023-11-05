@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.actividadm4.vista;
-
 import com.mycompany.actividadm4.controlador.ControllerTareas;
 import com.mycompany.actividadm4.model.Tareas;
 
@@ -43,7 +42,7 @@ public class VentanaEditar extends javax.swing.JFrame {
         inputId = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
