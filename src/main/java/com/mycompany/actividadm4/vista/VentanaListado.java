@@ -6,8 +6,6 @@ package com.mycompany.actividadm4.vista;
 
 import com.mycompany.actividadm4.controlador.ControllerTareas;
 import com.mycompany.actividadm4.model.Tareas;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 

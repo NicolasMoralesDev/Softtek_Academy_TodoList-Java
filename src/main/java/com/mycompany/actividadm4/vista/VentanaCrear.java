@@ -18,6 +18,7 @@ public class VentanaCrear extends javax.swing.JPanel {
      */
     public VentanaCrear() {
         initComponents();
+        
    
     }
 
