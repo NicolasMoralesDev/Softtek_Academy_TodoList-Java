@@ -6,20 +6,22 @@ package com.mycompany.actividadm4.vista;
 
 import com.mycompany.actividadm4.controlador.ControllerTareas;
 import com.mycompany.actividadm4.model.Tareas;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Nico Morales
  */
 public class VentanaCrear extends javax.swing.JPanel {
-     ControllerTareas control = new ControllerTareas();
+
+    ControllerTareas control = new ControllerTareas();
+
     /**
      * Creates new form NewJPanel
      */
     public VentanaCrear() {
         initComponents();
-        
-   
+
     }
 
     /**
@@ -108,18 +110,32 @@ public class VentanaCrear extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+
         Tareas tarea = new Tareas();
-        
+
         String titulo = inputTitle.getText();
         String descripcion = inputDescripcion.getText();
-        
-        tarea.setTitulo(titulo);
-        tarea.setDescripcion(descripcion);
-        control.crearTarea(tarea);       
 
-        inputTitle.setText("");
-        inputDescripcion.setText("");
+        if (!titulo.isEmpty()) {
+
+            if (!descripcion.isEmpty()) {
+
+                tarea.setTitulo(titulo);
+                tarea.setDescripcion(descripcion);
+                control.crearTarea(tarea);
+
+                inputTitle.setText("");
+                inputDescripcion.setText("");
+            } else {
+
+                JOptionPane.showMessageDialog(null, "La descripcion es Obligatoria!!!");
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "El titulo es Obligatorio!!!");
+        }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void inputTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTitleActionPerformed

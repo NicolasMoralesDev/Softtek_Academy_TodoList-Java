@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.actividadm4.vista;
+
 import com.mycompany.actividadm4.controlador.ControllerTareas;
 import com.mycompany.actividadm4.model.Tareas;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,7 +18,7 @@ public class VentanaEditar extends javax.swing.JFrame {
      * Creates new form VentanaEditar
      */
     public VentanaEditar(Tareas tarea) {
-        
+
         this.setTitle("Editar Tarea");
         initComponents();
         cargarDatosTarea(tarea);
@@ -147,16 +149,32 @@ public class VentanaEditar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+
         ControllerTareas controlTarea = new ControllerTareas();
-        
-        Long id = Long.parseLong(inputId.getText());
-        String titulo = inputTitle.getText();
-        String descripcion = inputDescription.getText();
-        
-        controlTarea.modificarTarea(id,titulo, descripcion);
-        
-        this.dispose();
+
+        if (!inputTitle.getText().isEmpty()) {
+
+            if (!inputDescription.getText().isEmpty()) {
+
+                Long id = Long.parseLong(inputId.getText());
+                String titulo = inputTitle.getText();
+                String descripcion = inputDescription.getText();
+
+                controlTarea.modificarTarea(id, titulo, descripcion);
+
+                this.dispose();
+            } else {
+
+                JOptionPane.showMessageDialog(null, "La Descripcion es Obligatoria!!!");
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "El titulo es Obligatorio!!!");
+
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void inputIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIdActionPerformed
@@ -168,15 +186,15 @@ public class VentanaEditar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-     
+
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-       
+
     }//GEN-LAST:event_formWindowClosed
 
-    private void cargarDatosTarea(Tareas tarea){
-        
+    private void cargarDatosTarea(Tareas tarea) {
+
         inputId.setText(tarea.getId().toString());
         inputTitle.setText(tarea.getTitulo());
         inputDescription.setText(tarea.getDescripcion());
