@@ -21,12 +21,12 @@ public class Tareas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private String nombre;
+    private String titulo;
     private String descripcion;
 
-    public Tareas(Long Id, String nombre, String descripcion) {
+    public Tareas(Long Id, String titulo, String descripcion) {
         this.Id = Id;
-        this.nombre = nombre;
+        this.titulo = titulo;
         this.descripcion = descripcion;
     }
 

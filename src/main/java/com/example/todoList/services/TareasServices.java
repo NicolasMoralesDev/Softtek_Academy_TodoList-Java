@@ -38,8 +38,17 @@ public class TareasServices  implements ITareasServices{
        
         try {
             
-            tareaRepo.save(tarea);
-            return new Message("Tarea creada con Exito!!");
+            if (tareaRepo.findByTitle(tarea.getTitulo()).isEmpty()) {
+                
+               tareaRepo.save(tarea);
+               return new Message("Tarea creada con Exito!!"); 
+            
+            } else {
+                
+                return new Message("La Tarea ya Existe!!"); 
+
+            }
+           
             
         } catch (Exception e) {
             
