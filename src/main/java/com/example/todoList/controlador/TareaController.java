@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Nico Morales
  */
 
-@RestController
+
 @RequestMapping("/tareas")
+@RestController
 public class TareaController {
     
     @Autowired
