@@ -17,7 +17,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ITareaRepository extends JpaRepository<Tareas, Long>{
     
-     
+     /**
+      * 
+      * @param titulo.
+      * @return Retorna una tarea cuyo titulo coincida con el parametro.
+      */
+    
     @Query("SELECT t FROM Tareas t WHERE t.titulo = :titulo")
     List<Tareas> findByTitle(@Param("titulo") String titulo);
 }

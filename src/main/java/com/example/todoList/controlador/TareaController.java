@@ -3,6 +3,7 @@ package com.example.todoList.controlador;
 
 import com.example.todoList.model.Tareas;
 import com.example.todoList.services.TareasServices;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ public class TareaController {
     private TareasServices tareasServis;
     
     @GetMapping("/traer")
+    @Operation(summary = "Traer Todas las tareas")
     @ResponseBody
     public ResponseEntity<?> traerTareas(){
         
@@ -37,6 +39,7 @@ public class TareaController {
     }
     
     @GetMapping("/traer/{id}")
+    @Operation(summary = "Traer una tarea por Id")
     @ResponseBody
     public ResponseEntity<?> traerTarea(@PathVariable Long id){
         
@@ -44,7 +47,8 @@ public class TareaController {
     }
     
     
-    @PostMapping("/creo")
+    @PostMapping("/crear")
+    @Operation(summary = "Crear tareas")
     @ResponseBody
     public ResponseEntity<?> crearTarea(@RequestBody Tareas tarea){
         
@@ -53,6 +57,7 @@ public class TareaController {
     
     
     @DeleteMapping("/borrar/{id}")
+    @Operation(summary = "Borrar tarea por Id")
     @ResponseBody
     public ResponseEntity<?> borroTarea(@PathVariable Long id){
         
@@ -60,9 +65,9 @@ public class TareaController {
     }
     
     @PutMapping("/editar")
+    @Operation(summary = "Editar tarea")
     @ResponseBody
     public ResponseEntity<?> modificarTarea(@RequestBody Tareas tarea){
-        
         return new ResponseEntity(tareasServis.editarTarea(tarea), HttpStatus.ACCEPTED);
     }
 }
