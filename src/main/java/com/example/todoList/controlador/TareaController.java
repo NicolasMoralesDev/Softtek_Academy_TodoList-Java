@@ -3,6 +3,7 @@ package com.example.todoList.controlador;
 
 import com.example.todoList.model.Tareas;
 import com.example.todoList.services.TareasServices;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /**
  *
  * @author Nico Morales
@@ -26,10 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tareas")
 @RestController
 public class TareaController {
-    
+ 
     @Autowired
     private TareasServices tareasServis;
-    
+   
     @GetMapping("/traer")
     @Operation(summary = "Traer Todas las tareas")
     @ResponseBody
