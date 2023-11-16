@@ -23,26 +23,41 @@ export default function CardTask(props: Props) {
 
 
   const handleOpen = () => {
-    setModal(true)
-    setEdit(props)
+    setModal(true);
+    setEdit(props);
   };
 
   async function borrarTarea(id: number) {
 
-    /*  Swal.fire({
-       title: 'Seguro?',
-       text: 'Esta accion es inrreversible!',
-       icon: 'warning',
-       confirmButtonText: 'continuar'
-     })
-  */
-    const message = await deleteTask(id);
-
     Swal.fire({
-      title: `${message}`,
-      icon: 'success',
+      title: 'Seguro?',
+      text: 'Esta accion es inrreversible!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'continuar',
+      denyButtonText: "cancelar"
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        async function eliminar(id: any) {
+          const message = await deleteTask(id);
+          Swal.fire({
+            title: `${message}`,
+            icon: 'success',
+          });
+          setFlag(!flag);
+
+        }
+
+        eliminar(id);
+
+      } else if (result.isDenied) {
+        Swal.fire("cancelado", "", "info");
+        setFlag(!flag);
+
+      }
     });
-    setFlag(!flag);
+
   };
 
 
@@ -52,7 +67,7 @@ export default function CardTask(props: Props) {
       <Card className="mt-6">
         <CardBody>
           <Typography variant="h5" color="blue-gray" className="mb-2">
-            {props.titulo.toUpperCase()}
+            {props.titulo ? props.titulo : <></>}
           </Typography>
           <Typography>
             {props.descripcion}
