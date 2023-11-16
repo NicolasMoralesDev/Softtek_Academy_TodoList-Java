@@ -16,9 +16,8 @@ const FormCreateTask = () => {
 
 
     const handleChange = (e: any) => {
+        
         const { name, value } = e.target;
-        console.log(data);
-
         setData((prevState: any) => ({ ...prevState, [name]: value }));
     };
 
