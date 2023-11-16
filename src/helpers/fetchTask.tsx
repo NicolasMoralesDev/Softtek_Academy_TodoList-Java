@@ -1,5 +1,3 @@
-
-
 const urlBase = "https://api-todolist-06yh.onrender.com/tareas";
 
 const getAllTask = async ()  => {
@@ -12,8 +10,44 @@ const getAllTask = async ()  => {
     });
     const data = await response.json();
 
+
     return data;
 };
 
 
-export default getAllTask;
+const deleteTask = async (id:number)  => {
+
+    const response = await fetch(`${urlBase}/borrar/${id}`, {
+        method:"DELETE",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+    });
+    
+    const data = await response.json();
+
+    return data.msg;
+};
+
+
+export const putTask = async (tarea: any)  => {
+
+    const response = await fetch(`${urlBase}/editar`, {
+        method:"PUT",
+        body: JSON.stringify({
+           id:tarea.id,
+           titulo:tarea.titulo,
+           descripcion:tarea.descripcion
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+    });
+    
+    const data = await response.json();
+
+    return data.msg;
+};
+
+
+export  {getAllTask, deleteTask};
