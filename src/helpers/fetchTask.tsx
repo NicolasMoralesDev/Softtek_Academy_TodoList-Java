@@ -50,4 +50,24 @@ export const putTask = async (tarea: any)  => {
 };
 
 
+export const postTask = async (tarea: any) => {
+
+    const response = await fetch(`${urlBase}/crear`, {
+
+        method:"POST", 
+        body:JSON.stringify({
+            titulo:tarea.titulo,
+            descripcion: tarea.descripcion
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+    });
+
+    const data = await response.json();
+
+    return data.msg;
+}
+
+
 export  {getAllTask, deleteTask};

@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import { useContext } from "react";
 import {
   Button,
   Dialog,
@@ -16,32 +16,32 @@ import Swal from "sweetalert2";
 
 export function ModalEditTask() {
 
-    const { modal, setModal, edit, setEdit, flag, setFlag } : any = useContext(StateContext);
+  const { modal, setModal, edit, setEdit, flag, setFlag }: any = useContext(StateContext);
 
 
-    const handleChange = (e: any) => {
-      const { name, value } = e.target;
-      setEdit((prevState: any) => ({ ...prevState, [name]: value }));
-    };
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setEdit((prevState: any) => ({ ...prevState, [name]: value }));
+  };
 
-    const editSubmit = async () => {
+  const editSubmit = async () => {
 
-     const message = await putTask(edit);
-     setFlag(!flag);
-     setModal(false);
-     Swal.fire({
+    const message = await putTask(edit);
+    setFlag(!flag);
+    setModal(false);
+    Swal.fire({
       title: `${message}`,
       icon: 'success',
 
     });
 
-    }
- 
-   const handleOpen = () => setModal(false);
- 
+  }
+
+  const handleOpen = () => setModal(false);
+
   return (
     <>
-    <Dialog open={modal} size="xs" handler={()=>""}>
+      <Dialog open={modal} size="xs" handler={() => ""}>
         <div className="flex items-center justify-between">
           <DialogHeader className="flex flex-col items-start">
             {" "}
@@ -65,15 +65,15 @@ export function ModalEditTask() {
         </div>
         <DialogBody>
           <div className="grid gap-6">
-            <Input crossOrigin={()=> 1} onChange={handleChange} name="titulo" label="titulo" alt="input titulo" value={edit.titulo} />
+            <Input crossOrigin={Dialog} onChange={handleChange} name="titulo" label="titulo" alt="input titulo" value={edit.titulo} />
             <Textarea onChange={handleChange} name="descripcion" label="Descripcion" value={edit.descripcion} />
           </div>
         </DialogBody>
         <DialogFooter className="space-x-2">
-          <Button variant="text" color="gray" onClick={handleOpen}>
+          <Button variant="gradient" color="red" onClick={handleOpen}>
             cancelar
           </Button>
-          <Button variant="gradient" color="gray" onClick={ editSubmit}>
+          <Button variant="gradient" color="green" onClick={editSubmit}>
             editar
           </Button>
         </DialogFooter>
