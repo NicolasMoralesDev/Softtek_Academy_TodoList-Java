@@ -1,4 +1,3 @@
-import { open } from "@material-tailwind/react/types/components/accordion";
 import { StateContext } from "./StateContext"
 import { useState } from "react"
 
