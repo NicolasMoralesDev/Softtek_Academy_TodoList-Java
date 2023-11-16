@@ -16,7 +16,7 @@ const FormCreateTask = () => {
 
 
     const handleChange = (e: any) => {
-        
+
         const { name, value } = e.target;
         setData((prevState: any) => ({ ...prevState, [name]: value }));
     };
@@ -45,6 +45,7 @@ const FormCreateTask = () => {
                         </Typography>
                         <Input
                             crossOrigin={Card}
+                            required
                             size="lg"
                             name='titulo'
                             onChange={handleChange}

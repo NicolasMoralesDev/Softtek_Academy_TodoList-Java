@@ -65,7 +65,7 @@ export function ModalEditTask() {
         </div>
         <DialogBody>
           <div className="grid gap-6">
-            <Input crossOrigin={Dialog} onChange={handleChange} name="titulo" label="titulo" alt="input titulo" value={edit.titulo} />
+            <Input crossOrigin={Dialog} required onChange={handleChange} name="titulo" label="titulo" alt="input titulo" value={edit.titulo} />
             <Textarea onChange={handleChange} name="descripcion" label="Descripcion" value={edit.descripcion} />
           </div>
         </DialogBody>
