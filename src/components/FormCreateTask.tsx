@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { StateContext } from '../context/StateContext';
+import icono from "/to-do-list.png";
 import { postTask } from '../helpers/fetchTask';
 import {
     Card,
@@ -35,7 +36,8 @@ const FormCreateTask = () => {
     return (
         <section className='flex justify-center m-16'>
             <Card color="white" shadow={true} className='p-3'>
-                <Typography variant="h4" color="black" className='text-center'>
+                <Typography variant="h4" color="black" className='text-center flex items-center justify-center gap-2'>
+                <img src={icono} className='h-14' alt="icono"/>
                     Crear Tarea
                 </Typography>
                 <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">

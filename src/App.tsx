@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import './App.css'
+import icono from "../public/checklist.png";
 import CardTask from './components/CardTask'
 import { getAllTask } from './helpers/fetchTask';
 import { StateContext } from './context/StateContext';
@@ -35,8 +36,9 @@ function App() {
 
   return (
     <>
-      <section className='p-5'>
-        <h1 className="text-center text-white text-4xl">Lista de Tareas</h1>
+      <section className='p-5 flex justify-center items-center'>
+        <img src={icono} className='h-20' alt="icono titulo" />
+        <h1 className="text-center text-white text-4xl font-semibold ">Lista de Tareas</h1>
       </section>
 
       <section className='w-full  flex  justify-center'>
