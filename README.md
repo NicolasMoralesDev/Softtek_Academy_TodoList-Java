@@ -1,40 +1,68 @@
-# Despliege con Docker TodoList
 
-- Actividad 6 desarrollada durante la cursada de la Academia Softek.
-- Esta actividad consiste en dockerizar la API desarrollada en SpringBoot  y su Frontend desarrollado en React.
+# 📑 App TodoList FullStack
 
-![Logo](https://assets.zabbix.com/img/logo/docker.svg)
+![Portada](https://firebasestorage.googleapis.com/v0/b/fotos-cde1e.appspot.com/o/Captura-Actividad5.PNG?alt=media&token=afa2a178-e26a-4425-822f-83bdf83ce105)
 
 
 
 
-## Instalacion:
+## 💻 Tecnologias usadas
 
-- Es importante tener instalado docker desktop antes.
-#### 1 - Clonar el repositorio:
-```bash
-git clone https://github.com/NicolasMoralesDev/Softek_Academy_TodoList-Java.git
+### Front End:
+- Tailwind CSS
+- TypeScript
+- React JS empaquetado con Vite
+- Sweet Alert, para los modales animados
+
+### Back End:
+- Java
+- Spring Boot Framework
+- MySql
+- Api Docunmentada con Swagger
+
+
+## 👨🏻‍💻 API Documentacion
+## Links importantes
+
+- [Testeo de la Api con swagger]( https://api-todolist-06yh.onrender.com/swagger-ui/index.html#/)
+- [Deploy del Front End](https://todolist-nicolas-morales.netlify.app)
+(Puede demorar la primera carga de tareas, al ser gratuito el servidor de la base de datos se desconecta cuyando hay inactividad)
+
+#### Traer Todas las Tareas
+
+```http
+  GET /tareas/traer
 ```
 
+#### Traer tarea por Id
 
-#### 2 - Abrir CMD dentro del fichero clonado, para correr las imagenes:
-
-  - Tipiar el siguiente comando:
-
-```Docker
- Docker-compose build
-
+```http
+  GET /tareas/traer/${id}
 ```
 
-#### 3 - Luego en la misma ruta ingresar este comando para levantar el container:
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `long` | **Requerido**. Requiere un id valido|
 
-```Docker
- Docker-compose up
+#### Crear Tarea
 
+```http
+  POST /tareas/crear
 ```
-#### 3 - Si todo salio bien, dentro de Docker Desktop se podran ver los containers corriendo:
 
-![Logo](https://firebasestorage.googleapis.com/v0/b/fotos-cde1e.appspot.com/o/Docker.PNG?alt=media&token=41fb40e0-7ea9-4d65-8213-a8f9ba0855f7)
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `Tarea`   | `Tarea`  | Requiere un objeto de tipo Tarea en el body|
 
-    
-    
+#### Borrar tarea por Id
+
+```http
+  DELETE /tareas/borrar/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `long` | **Requerido**. Requiere un id valido|
+
+
+
