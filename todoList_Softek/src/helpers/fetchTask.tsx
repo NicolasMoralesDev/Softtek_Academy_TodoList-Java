@@ -1,4 +1,4 @@
-const urlBase = "https://localhost:8080/tareas";
+const urlBase = "http://localhost:8080/tareas";
 
 const getAllTask = async ()  => {
 
