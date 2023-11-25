@@ -1,0 +1,54 @@
+version: "2.1"
+
+services:
+
+  frontend:
+    container_name: todoListFront
+    build: ./todoList_Softek
+    ports:
+      - 5173:5173
+    networks:
+      - "appTodoList"
+  backend:
+    container_name: todoListBack
+    build: ./Backend
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=jdbc:mysql://database:3306/todoLists
+      - DATABASE_USERNAME=nico
+      - DATABASE_PASSWORD=123
+    networks:
+      - "appTodoList"
+  database:
+    container_name: database # Nombre del contenedor
+    image: mysql:8.0.33 # Imagen de la base de datos, en este caso se usa MySQL
+    ports:
+      - 3306:3306
+    environment:
+      # Variables de entorno
+      MYSQL_DATABASE: todoLists
+      MYSQL_USER: nico
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: 123
+    networks:
+      # Red de Docker por la que se comunicará con otros contenedores
+      - appTodoList
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-p$$MYSQL_ROOT_PASSWORD"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+networks:
+  appTodoList:

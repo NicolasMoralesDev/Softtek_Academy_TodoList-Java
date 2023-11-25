@@ -1,0 +1,7 @@
+com\example\todoList\model\Message.class
+com\example\todoList\TodoListApplication.class
+com\example\todoList\model\Tareas.class
+com\example\todoList\services\ITareasServices.class
+com\example\todoList\repository\ITareaRepository.class
+com\example\todoList\services\TareasServices.class
+com\example\todoList\controlador\TareaController.class
