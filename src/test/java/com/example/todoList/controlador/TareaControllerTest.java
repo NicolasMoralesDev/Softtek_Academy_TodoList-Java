@@ -45,9 +45,10 @@ class TareaControllerTest {
     @DisplayName("Prueba crear tarea")
      void saveTask(){
 
-        Tareas nueva = new Tareas(1L, "programar una api", "crear un back con java");
+        Tareas nueva = new Tareas(1L, "programar 7 api", "crear un back con java");
         Message response = tareaServ.crearTareas(nueva);
-        assertEquals("Tarea creada con Exito!!", response.getMsg());
+        assertEquals("Tarea creada con Exito!!", response.getMsg(), "No se pudo crear la tarea!");
+        assertTrue(response.getMsg().equals("Tarea creada con Exito!!" ) , "Tarea creada!");
 
     }
 
@@ -77,7 +78,7 @@ class TareaControllerTest {
 //        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
 
           Tareas tarea =  tareaServ.traerTarea(1L).orElse(null);
-          assertEquals("programar", tarea.getTitulo());
+          assertEquals("programar", tarea.getTitulo(), "Fallo, no se encontrp la tarea");
 
     }
 
