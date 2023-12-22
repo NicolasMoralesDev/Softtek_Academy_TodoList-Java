@@ -39,7 +39,7 @@ public class TareaController {
     @ResponseBody
     public ResponseEntity<?> traerTareas(){
         
-        return new ResponseEntity(tareasServis.traerTareas(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(tareasServis.traerTareas(), HttpStatus.ACCEPTED);
     }
     
     @GetMapping("/traer/{id}")
@@ -47,7 +47,7 @@ public class TareaController {
     @ResponseBody
     public ResponseEntity<?> traerTarea(@PathVariable Long id){
         
-        return new ResponseEntity(tareasServis.traerTarea(id), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(tareasServis.traerTarea(id), HttpStatus.ACCEPTED);
     }
     
     
@@ -56,7 +56,7 @@ public class TareaController {
     @ResponseBody
     public ResponseEntity<?> crearTarea(@RequestBody Tareas tarea){
         
-        return new ResponseEntity(tareasServis.crearTareas(tarea), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(tareasServis.crearTareas(tarea), HttpStatus.ACCEPTED);
     }
     
     
@@ -65,13 +65,13 @@ public class TareaController {
     @ResponseBody
     public ResponseEntity<?> borroTarea(@PathVariable Long id){
         
-        return new ResponseEntity(tareasServis.borrarTarea(id), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(tareasServis.borrarTarea(id), HttpStatus.ACCEPTED);
     }
     
     @PutMapping("/editar")
     @Operation(summary = "Editar tarea")
     @ResponseBody
     public ResponseEntity<?> modificarTarea(@RequestBody Tareas tarea){
-        return new ResponseEntity(tareasServis.editarTarea(tarea), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(tareasServis.editarTarea(tarea), HttpStatus.ACCEPTED);
     }
 }
