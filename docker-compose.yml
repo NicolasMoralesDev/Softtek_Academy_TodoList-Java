@@ -1,54 +1,46 @@
-version: "2.1"
-
+## YAML Template.
 services:
 
-  frontend:
-    container_name: todoListFront
-    build: ./todoList_Softek
-    ports:
-      - 5173:5173
-    networks:
-      - "appTodoList"
   backend:
-    container_name: todoListBack
-    build: ./Backend
-    ports:
+    container_name: todoList # Nombre del contenedor
+    build: ./backend # Ubicación del archivo Dockerfile
+    ports: 
       - 8080:8080
-    environment:
-      - DATABASE_URL=jdbc:mysql://database:3306/todoLists
-      - DATABASE_USERNAME=nico
-      - DATABASE_PASSWORD=123
-    networks:
-      - "appTodoList"
-  database:
-    container_name: database # Nombre del contenedor
+    networks: 
+      - appTodoList
+    volumes:
+      - ./backend:/app # Ubicación donde se guardarán los datosw
+    environment: # Se reemplaza la ruta de la base de datos. En vez de "localhost" se dirige al contenedor "m5-mysql"
+      SPRING_DATASOURCE_URL: jdbc:mysql://m5-mysql:3306/softtek
+    depends_on: # "backend" inicia despues que se termine de cargar el servicio "db"
+      db:
+        condition: service_healthy
+
+  # Servicio 'db', contiene las configuraciones para la base de datos
+  baseDeDatos:
+    container_name: m5-mysql # Nombre del contenedor
     image: mysql:8.0.33 # Imagen de la base de datos, en este caso se usa MySQL
-    ports:
+    ports: # Puertos que se exponen
       - 3306:3306
-    environment:
-      # Variables de entorno
-      MYSQL_DATABASE: todoLists
-      MYSQL_USER: nico
-      MYSQL_PASSWORD: 123
-      MYSQL_ROOT_PASSWORD: 123
-    networks:
-      # Red de Docker por la que se comunicará con otros contenedores
+    environment: # Variables de entorno
+      MYSQL_DATABASE: softtek
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: 
+
+    volumes:  # Ubicación donde se guardarán los datos
+      - academia_db:/var/lib/mysql
+    networks:  # Red de Docker por la que se comunicará con otros contenedores
       - appTodoList
     restart: unless-stopped
     healthcheck:
-      test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "localhost",
-          "-uroot",
-          "-p$$MYSQL_ROOT_PASSWORD"
-        ]
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p$$MYSQL_ROOT_PASSWORD"]
       interval: 5s
       timeout: 5s
       retries: 20
 
-networks:
+networks: # Configuración de la red de docker
   appTodoList:
+    driver: bridge
+volumes: # Configuración del almacen de datos de docker
+  academia_db:
