@@ -44,6 +44,8 @@ class TareasServicesTest {
 
         Assertions.assertEquals(resultado.getTitulo(), esperada.getTitulo(), "Fallo, no trae la tarea por id");
 
+        Mockito.verify(tareasRepo).findById(1L);
+
 
     }
 
@@ -62,6 +64,8 @@ class TareasServicesTest {
         Mockito.when(tareasRepo.findAll()).thenReturn(tareas);
 
         Assertions.assertEquals(tareasServ.traerTareas(), tareas, "Fallo, no se encontraron tareas!");
+        Mockito.verify(tareasRepo).findAll();
+
     }
 
     @Test
